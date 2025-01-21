@@ -7,7 +7,7 @@ class Window:
     self.height = height
     self.__root = Tk()
     self.__root.title("MazeWindow")
-    self.__canvas = Canvas(self.__root, Width=self.width, Height=self.height)
+    self.__canvas = Canvas(self.__root, width=self.width, height=self.height)
     self.__canvas.pack(fill=BOTH)
     self.__running = False
     self.__root.protocol("WM_DELETE_WINDOW", self.close)
@@ -22,4 +22,9 @@ class Window:
       self.redraw()
   def close(self):
     self.__running = False
+
+
+if __name__ == "__main__":
+    win = Window(800, 600)
+    win.wait_for_close()
   
