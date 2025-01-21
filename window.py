@@ -15,4 +15,11 @@ class Window:
   def redraw(self):
     self.__root.update_idletasks()
     self.__root.update()
-
+    
+  def wait_for_close(self):
+    self.__running = True
+    while self.__running:
+      self.redraw()
+  def close(self):
+    self.__running = False
+  
