@@ -119,6 +119,11 @@ if __name__ == "__main__":
     cell2 = Cell(40,20,60,40, win)
     cell2.draw()
     cell1.draw_move(cell2, True)
+    cell3 = Cell(760,560,780,580, win)
+    cell3.draw()
+    cell4 = Cell(760,540,780,560, win)
+    cell4.draw()
+    cell4.draw_move(cell3)
 
 
     
