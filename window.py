@@ -14,6 +14,43 @@ class Line:
       self.point1.x, self.point1.y, self.point2.x, self.point2.y, fill= fill_color, width=2
     )
 
+class Cell:
+  def __init__(self, x1, y1, x2, y2, win):
+    self._x1 = x1
+    self._y1 = y1
+    self._x2 = x2
+    self._y2 = y2
+    self._win = win
+    self.has_left_wall = True
+    self.has_right_wall = True
+    self.has_top_wall = True
+    self.has_bottom_wall = True
+  def draw(self):
+    if self.has_left_wall:
+      point1 = Point(self._x1, self._y1)
+      point2 = Point(self._x1, self._y2)
+      line = Line(point1,point2)
+      self._win.draw_line(line ,'black')
+    if self.has_top_wall:
+      point1 = Point(self._x1, self._y1)
+      point2 = Point(self._x2, self._y1)
+      line = Line(point1,point2)
+      self._win.draw_line(line ,'black')
+    if self.has_bottom_wall:
+      point1 = Point(self._x1, self._y2)
+      point2 = Point(self._x2, self._y2)
+      line = Line(point1,point2)
+      self._win.draw_line(line ,'black')
+    if self.has_right_wall:
+      point1 = Point(self._x2, self._y1)
+      point2 = Point(self._x2, self._y2)
+      line = Line(point1,point2)
+      self._win.draw_line(line ,'black')
+
+
+
+
+
 class Window:
   def __init__(self, width, height):
     #initialise the window with paramaters.
@@ -60,6 +97,9 @@ if __name__ == "__main__":
     win.draw_line(line2 ,'green')
     line3 = Line(point5, point6)
     win.draw_line(line3 ,'blue')
+
+    # Creating a test cell
+    
     
     win.wait_for_close()
   
