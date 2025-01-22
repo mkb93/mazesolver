@@ -99,7 +99,9 @@ if __name__ == "__main__":
     win.draw_line(line3 ,'blue')
 
     # Creating a test cell
-    
+    cell1 = Cell(20,20,500,500, win)
+    cell1.draw()
+
     
     win.wait_for_close()
   
