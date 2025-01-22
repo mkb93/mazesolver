@@ -57,10 +57,10 @@ class Cell:
     cell_center2 = Point(center_x2, center_y2)
     
     line = Line(cell_center1, cell_center2)
+    line_color = 'red'
     if undo:
-      self._win.draw_line(line, 'gray')
-    else:
-      self._win.draw_line(line, 'red')
+      line_color = 'gray'
+    self._win.draw_line(line,line_color)
 
 
 
