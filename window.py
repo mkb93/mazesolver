@@ -48,10 +48,18 @@ if __name__ == "__main__":
     # Create points
     point1 = Point(11, 22)  # Replace with actual coordinates
     point2 = Point(33, 45)  # Replace with actual coordinates
+    point3 = Point(110, 220)  # Replace with actual coordinates
+    point4 = Point(330, 450)  # Replace with actual coordinates
+    point5 = Point(115, 22)  # Replace with actual coordinates
+    point6 = Point(335, 45)  # Replace with actual coordinates
 
     # Create a line using those points
-    line = Line(point1, point2)
-    win.draw_line(line ,'red')
+    line1 = Line(point1, point2)
+    win.draw_line(line1 ,'red')
+    line2 = Line(point3, point4)
+    win.draw_line(line2 ,'green')
+    line3 = Line(point5, point6)
+    win.draw_line(line3 ,'blue')
     
     win.wait_for_close()
   
