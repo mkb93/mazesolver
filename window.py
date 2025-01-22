@@ -46,6 +46,21 @@ class Cell:
       point2 = Point(self._x2, self._y2)
       line = Line(point1,point2)
       self._win.draw_line(line ,'black')
+  
+  def draw_move(self, to_cell, undo=False):
+    center_x1 = (self._x1 + self._x2)/2
+    center_y1 = (self._y1 + self._y2)/2
+    cell_center1 = Point(center_x1, center_y1)
+    
+    center_x2 = (to_cell._x1 + to_cell._x2)/2
+    center_y2 = (to_cell._y1 + to_cell._y2)/2
+    cell_center2 = Point(center_x2, center_y2)
+    
+    line = Line(cell_center1, cell_center2)
+    if undo:
+      self._win.draw_line(line, 'gray')
+    else:
+      self._win.draw_line(line, 'red')
 
 
 
@@ -99,8 +114,12 @@ if __name__ == "__main__":
     win.draw_line(line3 ,'blue')
 
     # Creating a test cell
-    cell1 = Cell(20,20,500,500, win)
+    cell1 = Cell(20,20,40,40, win)
     cell1.draw()
+    cell2 = Cell(40,20,60,40, win)
+    cell2.draw()
+    cell1.draw_move(cell2, True)
+
 
     
     win.wait_for_close()
