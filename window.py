@@ -32,21 +32,41 @@ class Cell:
       point2 = Point(self._x1, self._y2)
       line = Line(point1,point2)
       self._win.draw_line(line ,'black')
+    else:
+      point1 = Point(self._x1, self._y1)
+      point2 = Point(self._x1, self._y2)
+      line = Line(point1,point2)
+      self._win.draw_line(line ,'#d9d9d9')
     if self.has_top_wall:
       point1 = Point(self._x1, self._y1)
       point2 = Point(self._x2, self._y1)
       line = Line(point1,point2)
       self._win.draw_line(line ,'black')
+    else:
+      point1 = Point(self._x1, self._y1)
+      point2 = Point(self._x2, self._y1)
+      line = Line(point1,point2)
+      self._win.draw_line(line ,'#d9d9d9')
     if self.has_bottom_wall:
       point1 = Point(self._x1, self._y2)
       point2 = Point(self._x2, self._y2)
       line = Line(point1,point2)
       self._win.draw_line(line ,'black')
+    else:
+      point1 = Point(self._x1, self._y2)
+      point2 = Point(self._x2, self._y2)
+      line = Line(point1,point2)
+      self._win.draw_line(line ,'#d9d9d9')
     if self.has_right_wall:
       point1 = Point(self._x2, self._y1)
       point2 = Point(self._x2, self._y2)
       line = Line(point1,point2)
       self._win.draw_line(line ,'black')
+    else:
+      point1 = Point(self._x2, self._y1)
+      point2 = Point(self._x2, self._y2)
+      line = Line(point1,point2)
+      self._win.draw_line(line ,'#d9d9d9')
   
   def draw_move(self, to_cell, undo=False):
     center_x1 = (self._x1 + self._x2)/2
@@ -130,9 +150,20 @@ class Maze:
         cell.draw()
         self._animate()
       self._cells.append(row_cells)
+    self._break_entrance_and_exit()
+    
   def _animate(self):
     self._win.redraw()
     time.sleep(0.05)
+  def _break_entrance_and_exit(self):
+    #create a entrance cell
+    entrance_cell = self._cells[0][0]
+    last_cell = self._cells[-1][-1]
+    entrance_cell.has_top_wall = False
+    last_cell.has_bottom_wall = False
+    entrance_cell.draw()
+    last_cell.draw()
+
 
 
 
@@ -171,7 +202,7 @@ if __name__ == "__main__":
     # cell4.draw_move(cell3)
 
     # creating a test maze with multiple cells
-    maze = Maze(0,0,40,25,20,20, win)
+    maze = Maze(3,3,6,6,20,20, win)
     maze._create_cells()
 
 
