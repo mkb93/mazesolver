@@ -1,5 +1,6 @@
 from tkinter import Tk, BOTH, Canvas
 import time
+import random
 
 class Point:
   def __init__(self,x,y):
@@ -16,7 +17,7 @@ class Line:
     )
 
 class Cell:
-  def __init__(self, x1, y1, x2, y2, win):
+  def __init__(self, x1, y1, x2, y2, win, visited=False):
     self._x1 = x1
     self._y1 = y1
     self._x2 = x2
@@ -26,6 +27,7 @@ class Cell:
     self.has_right_wall = True
     self.has_top_wall = True
     self.has_bottom_wall = True
+    self.visited = visited
   def draw(self):
     if self.has_left_wall:
       point1 = Point(self._x1, self._y1)
@@ -122,7 +124,8 @@ class Maze:
     num_cols,
     cell_size_x,
     cell_size_y,
-    win
+    win,
+    seed=None
   ):
     self._x1 = x1
     self._y1 = y1
@@ -131,6 +134,10 @@ class Maze:
     self._cell_size_x = cell_size_x
     self._cell_size_y = cell_size_y
     self._win = win
+    if seed is not None:
+      random.seed(seed)
+
+    
 
   def _draw_cell(self, i, j):
     self._cells[i][j].draw()
