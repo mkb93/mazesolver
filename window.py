@@ -170,6 +170,50 @@ class Maze:
     last_cell.has_bottom_wall = False
     entrance_cell.draw()
     last_cell.draw()
+  def _break_walls_r(self, i, j):
+    self._cells[i][j].visited = True
+    while True:
+      possible_direction = []
+      new_i = i-1
+      new_j = j
+      if 0 <= new_i < self._height and 0 <= new_j < self._width:
+        if not self._cells[new_i][new_j].visited:
+          possible_direction.append((new_i, new_j))
+      new_i = i+1
+      new_j = j
+      if 0 <= new_i < self._height and 0 <= new_j < self._width:
+        if not self._cells[new_i][new_j].visited:
+          possible_direction.append((new_i, new_j))
+      new_i = i
+      new_j = j-1
+      if 0 <= new_i < self._height and 0 <= new_j < self._width:
+        if not self._cells[new_i][new_j].visited:
+          possible_direction.append((new_i, new_j))
+      new_i = i
+      new_j = j+1
+      if 0 <= new_i < self._height and 0 <= new_j < self._width:
+        if not self._cells[new_i][new_j].visited:
+          possible_direction.append((new_i, new_j))
+      if len(possible_direction) == 0:
+        return
+      chosen_index = random.randrange(len(possible_direction))
+      next_i, next_j = possible_direction[chosen_index]
+      #break_wall
+      if next_i < i: #moving up
+        self._cells[i][j].has_top_wall = False
+        self._cells[next_i][next_j].has_bottom_wall = False
+      elif next_i > i: #moving down
+        self._cells[next_i][next_j].has_top_wall = False
+        self._cells[i][j].has_bottom_wall = False
+      elif next_j < j: #moving left
+        self._cells[i][j].has_right_wall = False
+        self._cells[next_i][next_j].has_left_wall = False
+      elif next_j > j: #moving width
+        self._cells[i][j].has_left_wall = False
+        self._cells[next_i][next_j].has_right_wall = False
+      self._break_walls_r(next_i,next_j)
+
+
 
 
 
