@@ -167,6 +167,7 @@ class Maze:
     if self._win:
       self._win.redraw()
     self._reset_cells_visited(0,0)
+
     
   def _animate(self):
     self._win.redraw()
@@ -225,6 +226,49 @@ class Maze:
     for i in range(self._height):
       for j in range(self._width):
         self._cells[i][j].visited = False
+  def solve(self):
+    return self._solve_r(0,0)
+  def _solve_r(self,i,j):
+    if self._cells[i][j] == self._cells[-1][-1]:
+      return True
+    self._animate()
+    self._cells[i][j].visited = True
+    new_i, new_j = i, j
+    new_i = i+1
+    if 0 <= new_i < self._height:
+      if not self._cells[i][j].has_bottom_wall:
+        if not self._cells[new_i][new_j].visited:
+          self._cells[i][j].draw_move(self._cells[new_i][new_j])
+          if self._solve_r(new_i, new_j):
+            return True
+          self._cells[i][j].draw_move(self._cells[new_i][new_j], True)
+    new_i = i-1
+    if 0 <= new_i < self._height:
+      if not self._cells[i][j].has_top_wall:
+        if not self._cells[new_i][new_j].visited:
+          self._cells[i][j].draw_move(self._cells[new_i][new_j])
+          if self._solve_r(new_i, new_j):
+            return True
+          self._cells[i][j].draw_move(self._cells[new_i][new_j], True)
+    new_j = j+1
+    if 0 <= new_j < self._width:
+      if not self._cells[i][j].has_right_wall:
+        if not self._cells[i][new_j].visited:
+          self._cells[i][j].draw_move(self._cells[i][new_j])
+          if self._solve_r(i, new_j):
+            return True
+          self._cells[i][j].draw_move(self._cells[i][new_j], True)
+    new_j = j-1
+    if 0 <= new_j < self._width:
+      if not self._cells[i][j].has_left_wall:
+        if not self._cells[i][new_j].visited:
+          self._cells[i][j].draw_move(self._cells[i][new_j])
+          if self._solve_r(i, new_j):
+            return True
+          self._cells[i][j].draw_move(self._cells[i][new_j], True)
+    return False
+
+
 
 
 
@@ -266,11 +310,9 @@ if __name__ == "__main__":
     # cell4.draw_move(cell3)
 
     # creating a test maze with multiple cells
-    maze = Maze(0,0,12,12,20,20, win)
+    maze = Maze(0,0,20,20,20,20, win)
     maze._create_cells()
-
-
-
+    maze.solve()
     
     win.wait_for_close()
   
