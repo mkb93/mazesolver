@@ -131,6 +131,8 @@ class Maze:
     self._y1 = y1
     self._num_rows = num_rows
     self._num_cols = num_cols
+    self._height = num_rows
+    self._width = num_cols
     self._cell_size_x = cell_size_x
     self._cell_size_y = cell_size_y
     self._win = win
@@ -158,6 +160,13 @@ class Maze:
         self._animate()
       self._cells.append(row_cells)
     self._break_entrance_and_exit()
+    self._break_walls_r(0,0)
+    for i in range(self._height):
+      for j in range(self._width):
+        self._cells[i][j].draw()
+    if self._win:
+      self._win.redraw()
+    self._reset_cells_visited(0,0)
     
   def _animate(self):
     self._win.redraw()
@@ -206,12 +215,16 @@ class Maze:
         self._cells[next_i][next_j].has_top_wall = False
         self._cells[i][j].has_bottom_wall = False
       elif next_j < j: #moving left
-        self._cells[i][j].has_right_wall = False
-        self._cells[next_i][next_j].has_left_wall = False
-      elif next_j > j: #moving width
         self._cells[i][j].has_left_wall = False
         self._cells[next_i][next_j].has_right_wall = False
+      elif next_j > j: #moving right
+        self._cells[i][j].has_right_wall = False
+        self._cells[next_i][next_j].has_left_wall = False
       self._break_walls_r(next_i,next_j)
+  def _reset_cells_visited(self,i,j):
+    for i in range(self._height):
+      for j in range(self._width):
+        self._cells[i][j].visited = False
 
 
 
@@ -253,7 +266,7 @@ if __name__ == "__main__":
     # cell4.draw_move(cell3)
 
     # creating a test maze with multiple cells
-    maze = Maze(3,3,6,6,20,20, win)
+    maze = Maze(0,0,12,12,20,20, win)
     maze._create_cells()
 
 
