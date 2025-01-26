@@ -1,5 +1,10 @@
 a semi guided project through boot.dev
-
+running it locally requires a tkinter library and python3
+current issues to fix:
+  all classes are in the same module and therefore hard to read and navigate
+  not deployed to a git pages area
+  not in my pinned projects
+  try to add a video demo with a gif of it working on a basic maze
 #how to run
 I use tkinter library
 
