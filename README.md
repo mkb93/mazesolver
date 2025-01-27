@@ -1,7 +1,9 @@
 a semi guided project through boot.dev
 running it locally requires a tkinter library and python3
 current issues to fix:
-  all classes are in the same module and therefore hard to read and navigate
+  large classes are not refined so hard to read
+  tests are linked to the old way of running so need to be changed to work with separated classes
+  readme needs to be updated
   not deployed to a git pages area
   not in my pinned projects
   try to add a video demo with a gif of it working on a basic maze
