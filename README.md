@@ -5,6 +5,7 @@ current issues to fix:
   not deployed to a git pages area
   not in my pinned projects
   try to add a video demo with a gif of it working on a basic maze
+  should really be more tests
 #how to run
 I use tkinter library
 
