@@ -1,5 +1,6 @@
 import unittest
-from window import Maze, Window
+from window import Window
+from maze import Maze
 win = Window(800,500)
 class Tests(unittest.TestCase):
   def test_maze_create_cells(self):
@@ -18,7 +19,7 @@ class Tests(unittest.TestCase):
       len(m1._cells[0]),
       num_cols,
     )
-    #tests to see if all cells are reset to visited = False at the start of the solve
+    #tests to see if all cells reset visited = False at the start of the solve
     for i in range(num_rows):
       for j in range(num_cols):
         self.assertEqual(
